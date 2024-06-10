@@ -73,7 +73,7 @@ This study extends the PGI framework to perform multi-physics inversions, involv
 In this paper, we start by reviewing the key concepts of the PGI approach and generalize them to the case of multiple physical properties and governing equations for performing multi-physics inversions. We then delineate our strategy to address the numerical challenges of finding a solution to the inverse problem that fits each dataset and, at the same time, adequately fits the petrophysical data. Finally, we demonstrate the advantages of performing joint inversions, with various levels of prior knowledge, by using a synthetic model of the DO-$27$ Tli Kwi Cho kimberlite pipe, Northwest Territories, Canada \citep{JansenEtAl2004}.
 
 \begin{figure}
-    \includegraphics[width=\columnwidth]{New_Framework_with_numbers.pdf}
+    \includegraphics[width=\columnwidth]{Fig/LowRes/New_Framework_with_numbers.pdf}
     \caption{A graphical representation of the PGI framework, modified from \citet{ggz389}. Each diamond box is an optimization process that takes data (shown in rectangular boxes) as well as information provided by the other processes.}
     \label{fig:Framework_with_numbers.pdf}
 \end{figure}
@@ -158,7 +158,7 @@ The categorical variable is key for building a "quasi-geology model" \citep{Quas
 
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{GaussianMixture_3C_1and2D.png}
+    \includegraphics[width=\columnwidth]{Fig/LowRes/GaussianMixture_3C_1and2D.png}
     \caption{Example of a two-dimensional GMM with three rock units. The background is coloured according to the geological classification evaluated by equation \eqref{eq:MAP_z_physProp}. A thicker contour line indicates a higher iso-probability density level. On the left and bottom panels, we provide the 1D projections of the total and individual probability distributions for each physical property, and the cumulative histograms of the fictitious samples of each rock unit.}
     \label{fig:GaussianMixture_3C_1and2D.png}
 \end{figure}
@@ -308,7 +308,7 @@ Our strategy has proven to be insensitive to the initialization of the scaling p
 
 \begin{figure}
 \centering
-\includegraphics[width=\columnwidth]{TKC_ChiCurves.png}
+\includegraphics[width=\columnwidth]{Fig/LowRes/TKC_ChiCurves.png}
 \caption{Evolution curves of the scaling parameters $\{\chi\}$ with the proposed strategy for three multi-physics PGIs with full petrophysical information and different initializations for $\{\chi\}$. The color of each line corresponds to the geophysical misfit: blue for gravity and red with markers for magnetic. The style of the lines corresponds to one of the three inversions ($\chi_{0,\text{grav}}+\chi_{0,\text{mag}}=1$ in each inversion).}
 \label{fig:TKC_ChiCurves.png}
 \end{figure}
@@ -340,7 +340,7 @@ Scripts and Jupyter notebooks to reproduce the examples presented in this study 
 
 \begin{figure*}
     \centering
-    \includegraphics[width=\textwidth]{TKC_Setup_Synthetic.png}
+    \includegraphics[width=\textwidth]{Fig/LowRes/TKC_Setup_Synthetic.png}
     \caption{Setup: DO-$27$ synthetic example: (a) Plan map, East-West and North-South cross-sections through the synthetic geological model. The grid of dots represents the data locations for the gravity and magnetic survey; the dotted lines represent the location of each cross-section. (b) Cross-plot and histograms of the physical properties of the synthetic model; (c) Synthetic ground gravity data; (d) Synthetic total amplitude magnetic data.}
     \label{fig:TKC_Setup_Synthetic.png}
 \end{figure*}
@@ -353,7 +353,7 @@ For each inversion, we added bound constraints so that the sought density contra
 
 \begin{figure*}
     \centering
-    \includegraphics[width=\textwidth]{TKC_L2_Synthetic.png}
+    \includegraphics[width=\textwidth]{Fig/LowRes/TKC_L2_Synthetic.png}
     \caption{DO-$27$ gravity and magnetic Tikhonov inversion results. (a) Plan map, East-West and North-South cross-sections through the recovered density contrast model; (b) Plan map, East-West and North-South cross-sections through the recovered magnetic susceptibility contrast model; (c) Cross-plot of the density and magnetic susceptibility models. The points are coloured using the density and the magnetic susceptibility contrast values (white for the background (BCKGRD), blue for density contrast only, red for magnetic susceptibility contrast only, and purple for co-located significant density and magnetic susceptibility contrasts). The side and bottom panels show the marginal distribution of each physical property, with the best fitting univariate Gaussian (proba. stands for probability, and hist. stands for histogram). Those two univariate Gaussian distributions are used to compute the multivariate Gaussian showed in the background of the cross-plot; (d) Plan map, East-West and North-South cross-sections coloured based on the combination of density and magnetic susceptibility contrasts recovered by Tikhonov inversions (same colourmap as used in (c)).}
     \label{fig:TKC_L2_Synthetic.png}
 \end{figure*}
@@ -368,7 +368,7 @@ We next move to a PGI approach and include petrophysical information. We start b
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{TKC_IndividualPetro_Synthetic.png}
+\includegraphics[width=\textwidth]{Fig/LowRes/TKC_IndividualPetro_Synthetic.png}
 \caption{Results of the individual PGIs. (a) Plan map, East-West and North-South cross-sections through the density model recovered using the petrophysical signature of PK/VK; (b) Plan map, East-West and North-South cross-sections through the magnetic susceptibility model obtained using the petrophysical signature of HK; (c) Cross-plot of the inverted models. The 2D distribution in the background has been determined by combining the two 1D distributions used for density and magnetic susceptibility PGIs, respectively. With only one anomalous unit in each case, there is still four possible combinations; (d) Plan map, East-West and North-South cross-sections through the quasi-geology model built from the density and magnetic susceptibility models, see cross-plot in (c).}
 \label{fig:TKC_IndividualPetro_Synthetic.png}
 \end{figure*}
@@ -385,7 +385,7 @@ The gravity PGI using the PK/VK unit petrophysical signature (Fig. \ref{fig:TKC_
 
 \begin{figure*}
     \centering
-    \includegraphics[width=\textwidth]{TKC_Joint_Synthetic.png}
+    \includegraphics[width=\textwidth]{Fig/LowRes/TKC_Joint_Synthetic.png}
     \caption{Results of the multi-physics PGI with petrophysical information. (a) Plan map, East-West and North-South cross-sections through the recovered density contrast model; (b) Plan map, East-West and North-South cross-sections through the magnetic susceptibility contrast model; (c) Cross-plot of the inverted models. The colour of the points has been determined by the clustering obtained from this framework joint inversion process. In the background and side panels, we show the prior joint petrophysical distribution with true means we used for this PGI; (d) Plan map, East-West and North-South cross-sections through the resulting quasi-geology model.}
     \label{fig:TKC_Joint_Synthetic.png}
 \end{figure*}
@@ -421,7 +421,7 @@ Once the Tikhonov inversions have been run (see Fig. \ref{fig:TKC_L2_Synthetic.p
 
 \begin{figure*}
     \centering
-    \includegraphics[width=\textwidth]{TKC_NoPrior3ClustersAssumption_Synthetic.png}
+    \includegraphics[width=\textwidth]{Fig/LowRes/TKC_NoPrior3ClustersAssumption_Synthetic.png}
     \caption{Results of the multi-physics PGI without providing the means of the physical properties for the kimberlite facies, and assuming a low-density unit and a magnetized unit; (a) Plan map, East-West and North-South cross-sections through the recovered density contrast model; (b) Plan map, East-West and North-South cross-sections through the magnetic susceptibility contrast model; (c) Cross-plot of the inverted models. The colour of the points has been determined by the clustering obtained from this framework joint inversion process. In the background and side panels, we show the learned petrophysical GMM distribution; (d) Plan map, East-West and North-South cross-sections through the resulting quasi-geology model.}
     \label{fig:TKC_NoPrior3ClustersAssumption_Synthetic.png}
 \end{figure*}
@@ -434,7 +434,7 @@ The means of the GMM are learned iteratively following the constraints defined b
 
 \begin{figure}
 \centering
-\includegraphics[width=\columnwidth]{TKC_LearningGMMmeans.png}
+\includegraphics[width=\columnwidth]{Fig/LowRes/TKC_LearningGMMmeans.png}
 \caption{Evolution of the learned means of the GMM throughout the multi-physics PGI with qualitative information for the three assumed rock units (background, low-density kimberlite and magnetic kimberlite) shown in Figure \ref{fig:TKC_NoPrior3ClustersAssumption_Synthetic.png}. The background mean values, the density of the magnetic rock unit, and the magnetic susceptibility of the low-density rock unit are kept fixed. Initialization has a low impact on the learned mean values, and thus the values at iteration 0 are not shown in the plot. (a) Evolution of the density contrast mean values ; (b) Evolution of the magnetic susceptibility mean values.}
 \label{fig:TKC_LearningGMMmeans.png}
 \end{figure}
@@ -481,7 +481,7 @@ We sincerely thank the open-source software \texttt{SimPEG} community whose work
 \section{Working with nonlinear petrophysical relationships} \label{LinearWithMappingSection}
 
 \begin{figure}
-    \includegraphics[width=\columnwidth]{example_projection.png}
+    \includegraphics[width=\columnwidth]{Fig/LowRes/example_projection.png}
     \caption{GMM with various polynomial relationships: one linear (no addition required), one quadratic and one cubic. In the main panel, thicker contour lines indicate higher probabilities. The 1D probability distribution for each physical property, and the respective histogram of each unit, are projected on the left and bottom panels.}
     \label{fig:example_projection.png}
 \end{figure}
@@ -502,7 +502,7 @@ For comparison, we also jointly invert the datasets but without the polynomial r
 We also invert both datasets individually using the classic Tikhonov inversion. The result is shown in the last row of Figs \ref{fig:LinearWithMapping.png}(g) to (i). Results are smoother, as expected. The background presents even more variations, but the overall structures are recovered. Same as for the joint inversion without the polynomial relationships, the details are missing.
 
 \begin{figure*}
-    \includegraphics[width=\textwidth]{LinearWithMapping.png}
+    \includegraphics[width=\textwidth]{Fig/LowRes/LinearWithMapping.png}
     \caption{Linear joint inversions with various types of physical properties relationships (no trend, quadratic, cubic). Panels (a) to (c) show the inversion result with PGI using the known nonlinear relationships. The first panel (a) shows the result for the first problem, (b) for the second problem. The panel (c) shows the cross-plot of the models over the contour of the GMM with nonlinear relationships. Panels (d) to (f) show the result with PGI without nonlinear relationships. In panel (f), we show the used GMM without nonlinear relationships. Panels (g) to (i) show the Tikhonov inversions result.}
     \label{fig:LinearWithMapping.png}
 \end{figure*}
@@ -516,7 +516,7 @@ In this section, we generalize the learning of the GMM parameters presented in \
 \label{theta_posterior}
 \end{equation}
 
-We choose to follow a semi-conjugate prior approach for the choice of the prior distributions $\mathcal{P}(\Theta)$ \citep{ggz389, Murphy2012}. 
+We choose to follow a semi-conjugate prior approach for the choice of the prior distributions $\mathcal{P}(\Theta)$ \citep{ggz389, Murphy2012}.
 
 The computation of the responsibilities for the E-step of the MAP-EM algorithm stay the same as in \citet{ggz389}, except for the dimension of the parameters:
 
@@ -800,7 +800,7 @@ Finally, we assemble the inversion using \texttt{directives} in SimPEG to orches
 
 \begin{figure*}
     \centering
-    \includegraphics[width=\textwidth]{TKC_NoPrior_Synthetic.png}
+    \includegraphics[width=\textwidth]{Fig/LowRes/TKC_NoPrior_Synthetic.png}
     \caption{Results of the multi-physics PGI without providing the means of the physical properties for the kimberlite facies; a single kimberlite body is enough to meet the petrophysical requirements (the spread set by the covariances matrices) and reproduce the geophysical datasets; (a) Plan map, East-West and North-South cross-sections through the recovered density contrast model; (b) Plan map, East-West and North-South cross-sections through the magnetic susceptibility contrast model; (c) Cross-plot of the inverted models. The colour has been determined by the clustering obtained from this framework joint inversion process. In the background and side panels, we show the learned petrophysical GMM distribution; (d) Plan map, East-West and North-South cross-sections through the resulting quasi-geology model.}
     \label{fig:TKC_NoPrior_Synthetic.png}
 \end{figure*}
