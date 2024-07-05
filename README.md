@@ -16,7 +16,7 @@ In a previous paper, we introduced a framework for carrying out petrophysically 
 Thibaut Astic, Lindsey J Heagy, Douglas W Oldenburg, Petrophysically and geologically guided multi-physics inversion using a dynamic Gaussian mixture model, Geophysical Journal International, Volume 224, Issue 1, January 2021, Pages 40–68, https://doi.org/10.1093/gji/ggaa378
 
 ```
-@article{2021_astic_inversion,
+@article{astic_inversion_2021,
     author = {Astic, Thibaut and Heagy, Lindsey J and Oldenburg, Douglas W},
     title = "{Petrophysically and geologically guided multi-physics inversion using a dynamic Gaussian mixture model}",
     journal = {Geophysical Journal International},
