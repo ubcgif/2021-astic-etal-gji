@@ -1,75 +1,33 @@
-# Template repository for papers by the GIF group
+## Petrophysically and geologically guided multi-physics inversion using a dynamic Gaussian mixture model  
 
-Please use this repository as a template for papers
+_Thibaut Astic, Lindsey J Heagy and Douglas W Oldenburg_
 
-## Repository name
-
-The naming convention should follow 
-
-```
-year-authors-journal-short-title
-```
-
-As an example for two authors: 
-```
-2023-heagy-oldenburg-gji-casing-permeability
-```
-
-if there are more than 2 authors, you can use `etal` to indicate multiple authors, e.g. 
-```
-2024-heagy-etal-tle-future-of-applied-geophysics
-```
-
-## Contents
-
-The paper should be put in a `paper` folder. You can put the original latex there. The published pdf from the journal should also be included here. 
-
-Please also include a `thumbnail.png`. This should be a high-impact figure from the paper. 
-
-## MyST.md
-
-The key file that you will need to update is the `myst.yml` file which is located in the `paper` folder. You will need to fill out the fields that are currently commented out. 
-
-The project id should follow the pattern `ubcgif-YEAR-AUTHORS-JOURNAL`, e.g. `ubcgif-2023-heagy-oldenburg-gji` or `2024-heagy-etal-tle`
-
-Descriptions of the fields is available here: https://mystmd.org/guide/frontmatter#available-frontmatter-fields
-
-## Previewing the site
-
-You can preview the build using MyST. Please have MyST installed ([instructions](https://mystmd.org/guide/installing)). From the `paper` folder, you can then run 
-
-```
-myst start
-```
-
-and a preview will launch, usually from `http://localhost:3000`
-
-Also, whenever you create a pull-request to the repo, curvenote will build you a preview 🚀. A link will be added to the comment thread that looks something like this 
-
-![image](https://github.com/ubcgif/template-repository-paper/assets/6361812/b7a144c5-8458-474b-98c4-9e5890ac859e)
-
-
-## README 
-Please use the following as a template for the 
-```
-# Template repository for papers
-
-_Authors_
-
-[https://doi.org/XXX](https://doi.org/XXX)
+https://doi.org/10.1093/gji/ggaa378
 
 ![thumbnail](./paper/thumbnail.png)
 
 ## Summary
 
-Summary of the paper here (pulled from abstract/summary of paper) 
+In a previous paper, we introduced a framework for carrying out petrophysically and geologically guided geophysical inversions. In that framework, petrophysical and geological information is modelled with a Gaussian mixture model (GMM). In the inversion, the GMM serves as a prior for the geophysical model. The formulation and applications were confined to problems in which a single physical property model was sought, and a single geophysical data set was available. In this paper, we extend that framework to jointly invert multiple geophysical data sets that depend on multiple physical properties. The petrophysical and geological information is used to couple geophysical surveys that, otherwise, rely on independent physics. This requires advancements in two areas. First, an extension from a univariate to a multivariate analysis of the petrophysical data, and their inclusion within the inverse problem, is necessary. Secondly, we address the practical issues of simultaneously inverting data from multiple surveys and finding a solution that acceptably reproduces each one, along with the petrophysical and geological information. To illustrate the efficacy of our approach and the advantages of carrying out multi-physics inversions coupled with petrophysical and geological information, we invert synthetic gravity and magnetic data associated with a kimberlite deposit. The kimberlite pipe contains two distinct facies embedded in a host rock. Inverting the data sets individually, even with petrophysical information, leads to a binary geological model: background or undetermined kimberlite. A multi-physics inversion, with petrophysical information, differentiates between the two main kimberlite facies of the pipe. Through this example, we also highlight the capabilities of our framework to work with interpretive geological assumptions when minimal quantitative information is available. In those cases, the dynamic updates of the GMM allow us to perform multi-physics inversions by learning a petrophysical model.
+ 
 
 ## Citation
 
-Please include the formatted citation along with bibtex for the reference
+Thibaut Astic, Lindsey J Heagy, Douglas W Oldenburg, Petrophysically and geologically guided multi-physics inversion using a dynamic Gaussian mixture model, Geophysical Journal International, Volume 224, Issue 1, January 2021, Pages 40–68, https://doi.org/10.1093/gji/ggaa378
 
 ```
+@article{2021_astic_inversion,
+    author = {Astic, Thibaut and Heagy, Lindsey J and Oldenburg, Douglas W},
+    title = "{Petrophysically and geologically guided multi-physics inversion using a dynamic Gaussian mixture model}",
+    journal = {Geophysical Journal International},
+    volume = {224},
+    number = {1},
+    pages = {40-68},
+    year = {2020},
+    month = {08},
+    issn = {0956-540X},
+    doi = {10.1093/gji/ggaa378},
+    eprint = {https://academic.oup.com/gji/article-pdf/224/1/40/34193255/ggaa378.pdf},
+}
 
-## Examples
-- https://github.com/ubcgif/2023-heagy-oldenburg-gji-casing-permeability
-- https://github.com/ubcgif/2024-heagy-etal-tle-future-of-applied-geophysics
+```
