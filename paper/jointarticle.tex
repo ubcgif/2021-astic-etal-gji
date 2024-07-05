@@ -24,23 +24,23 @@
 \usepackage[linesnumbered, algoruled, lined, commentsnumbered, algo2e]{algorithm2e}
 \usepackage{algpseudocode}
 
-\title[Multi-physics PGI]
-  {Petrophysically and geologically guided multi-physics inversion using a dynamic Gaussian mixture model}
-\author[Thibaut Astic, Lindsey J. Heagy and Douglas W. Oldenburg]
-  {Thibaut Astic$^1$, Lindsey J. Heagy$^2$, and Douglas W. Oldenburg$^1$\\
-  $^1$ Geophysical Inversion Facility, Department of Earth, Ocean and Atmospheric Sciences,\\University of British Columbia, Vancouver, BC, Canada\\
-  $^2$Department of Statistics, University of California Berkeley, Berkeley, CA, United States
-  }
-\date{August 2020}
-\pagerange{}
-\volume{}
-\pubyear{}
+% \title[Multi-physics PGI]
+%   {Petrophysically and geologically guided multi-physics inversion using a dynamic Gaussian mixture model}
+% \author[Thibaut Astic, Lindsey J. Heagy and Douglas W. Oldenburg]
+%   {Thibaut Astic$^1$, Lindsey J. Heagy$^2$, and Douglas W. Oldenburg$^1$\\
+%   $^1$ Geophysical Inversion Facility, Department of Earth, Ocean and Atmospheric Sciences,\\University of British Columbia, Vancouver, BC, Canada\\
+%   $^2$Department of Statistics, University of California Berkeley, Berkeley, CA, United States
+%   }
+% \date{August 2020}
+% \pagerange{}
+% \volume{}
+% \pubyear{}
 
 % Authors with AMS fonts and mssymb.tex can comment out the following
 % line to get the correct symbol for Geophysical Journal International.
-\let\leqslant=\leq
+% \let\leqslant=\leq
 
-\newtheorem{theorem}{Theorem}[section]
+% \newtheorem{theorem}{Theorem}[section]
 
 \begin{document}
 
@@ -48,10 +48,10 @@
 
 \maketitle
 
-\begin{summary}
+\begin{abstract}
 In a previous paper, we introduced a framework for carrying out petrophysically and geologically guided geophysical inversions. In that framework, petrophysical and geological information is modelled with a Gaussian Mixture Model. In the inversion, the Gaussian Mixture model serves as a prior for the geophysical model. The formulation and applications were confined to problems in which a single physical property model was sought, and a single geophysical dataset was available. In this paper, we extend that framework to jointly invert multiple geophysical datasets that depend on multiple physical properties. The petrophysical and geological information is used to couple geophysical surveys that, otherwise, rely on independent physics. This requires advancements in two areas. First, an extension from a univariate to a multivariate analysis of the petrophysical data, and their inclusion within the inverse problem, is necessary. Second, we address the practical issues of simultaneously inverting data from multiple surveys and finding a solution that acceptably reproduces each one, along with the petrophysical and geological information. To illustrate the efficacy of our approach and the advantages of carrying out multi-physics inversions coupled with petrophysical and geological information, we invert synthetic gravity and magnetic data associated with a kimberlite deposit. The kimberlite pipe contains two distinct facies embedded in a host rock. Inverting the datasets individually, even with petrophysical information, leads to a binary geological model: background or undetermined kimberlite. A multi-physics inversion, with petrophysical information, differentiates between the two main kimberlite facies of the pipe. Through this example, we also highlight the capabilities of our framework to work with interpretive geologic assumptions when minimal quantitative information is available. In those cases, the dynamic updates of the Gaussian Mixture Model allow us to perform multi-physics inversions by learning a petrophysical model.
 
-\end{summary}
+\end{abstract}
 
 \begin{keywords}
 Inverse theory -- Joint Inversion -- Probability distributions -- Persistence, memory, correlations, clustering -- Numerical solutions -- Magnetic anomalies: modelling and interpretation
@@ -141,17 +141,17 @@ The PGI approach can be considered as an augmentation of the well-established Ti
 \subsection{Multivariate GMM: modelling multiple physical properties} \label{PetrophysicsSection}
 
 To extend the approach presented in \citet{ggz389}, we represent the petrophysical signature of each geological unit $j$ ($j=1..c$) as a multivariate Gaussian probability distribution, denoted by $\mathcal{N}$.
-The Gaussian function representing the probability distribution of the $q$ physical properties of interest for each unit is defined by its mean $\mitbf{\mu}_j$ (vector of size $q$), and its covariance matrix $\mitbf{\Sigma}_j$ (matrix of size $q\times q$), plus its proportion $\pi_j$.
+The Gaussian function representing the probability distribution of the $q$ physical properties of interest for each unit is defined by its mean $\mathbf{\mu}_j$ (vector of size $q$), and its covariance matrix $\mathbf{\Sigma}_j$ (matrix of size $q\times q$), plus its proportion $\pi_j$.
 
 The multivariate Gaussian Mixture Model (GMM) simply sums the Gaussian probability distribution representing each known unit, weighted by their proportion:
 \begin{equation}
-\mathcal{P}(\mathbf{x}|\Theta) = \sum_{j=1}^c \pi_j \mathcal{N}(\mathbf{x}_i|\mitbf{\mu}_j, \mitbf{\Sigma}_j) \label{GMM},
+\mathcal{P}(\mathbf{x}|\Theta) = \sum_{j=1}^c \pi_j \mathcal{N}(\mathbf{x}_i|\mathbf{\mu}_j, \mathbf{\Sigma}_j) \label{GMM},
 \end{equation}
-where the variable $\Theta$ holds the GMM global variables $\Theta= \left\{\pi_j, \mitbf{\mu}_j, \mitbf{\Sigma}_j\right\}_{j=1..c}$. With some modifications, the GMM can also represent nonlinear relationships, such as polynomial as presented in \citet{Onizawa2002}. We present those modifications in Appendix \ref{LinearWithMappingSection}, along with an example of an inversion with various nonlinear relationships between two physical properties.
+where the variable $\Theta$ holds the GMM global variables $\Theta= \left\{\pi_j, \mathbf{\mu}_j, \mathbf{\Sigma}_j\right\}_{j=1..c}$. With some modifications, the GMM can also represent nonlinear relationships, such as polynomial as presented in \citet{Onizawa2002}. We present those modifications in Appendix \ref{LinearWithMappingSection}, along with an example of an inversion with various nonlinear relationships between two physical properties.
 \newpage
 The geological classification (or membership) is denoted $\mathbf{z}$. It is defined as the most probable geological unit, given a set of values $\mathbf{x}$ for the $q$ physical properties:
 \begin{equation}
-z = \mathop{\hbox{argmax}}\limits_{j \in \left\{1..c\right\}} \pi_{j} \mathcal{N}(\mathbf{x}|\mitbf{\mu}_j,\mitbf{\Sigma}_j) \label{eq:MAP_z_physProp}.
+z = \mathop{\hbox{argmax}}\limits_{j \in \left\{1..c\right\}} \pi_{j} \mathcal{N}(\mathbf{x}|\mathbf{\mu}_j,\mathbf{\Sigma}_j) \label{eq:MAP_z_physProp}.
 \end{equation}
 
 The categorical variable is key for building a "quasi-geology model" \citep{QuasiGeologicalModel} from the physical properties model obtained by inversion. This corresponds to Process $3$ in the PGI framework (Fig. \ref{fig:Framework_with_numbers.pdf}).
@@ -173,7 +173,7 @@ In Fig. \ref{fig:GaussianMixture_3C_1and2D.png}, we present an example of a GMM 
 
 \citet{ggz389} developed a GMM smallness prior to include petrophysical and geological information in inversions involving only one type of geophysical survey with only one physical property to recover. In equation \eqref{eq:mixturemodel}, we propose a generalized version of the GMM smallness prior that is designed to couple multiple physical properties and incorporate geological information. Note that now the means are vectors that are the size of the number of different physical properties, and the scalar variance becomes a full positive-definite matrix of the same size. The parameters are both spatially (index $i$) and lithologically (index $j$) dependent.
 \begin{equation}
-\mathcal{M}(\mathbf{m}|\Theta) = \prod_{i=1}^n \sum_{j=1}^c \mathcal{P}(z_{i}=j)\mathcal{N}(\mathbf{m}_i|\mitbf{\mu}_j, \mathbf{W}_i^{-\top}\mitbf{\Sigma}_j\mathbf{W}_i^{-1}),
+\mathcal{M}(\mathbf{m}|\Theta) = \prod_{i=1}^n \sum_{j=1}^c \mathcal{P}(z_{i}=j)\mathcal{N}(\mathbf{m}_i|\mathbf{\mu}_j, \mathbf{W}_i^{-\top}\mathbf{\Sigma}_j\mathbf{W}_i^{-1}),
 \label{eq:mixturemodel}
 \end{equation}
 where:
@@ -183,10 +183,10 @@ where:
 \item $n$ is the number of active cells in the mesh.
 \item $\mathbf{m}_i$ represents the physical property values at location $i$.
 \item $\mathcal{P}(z_{i}=j)$ is the \textit{a priori} probability of observing rock unit $j$ at location $i$. It can be either constant over the whole area, then denoted by $\pi_j$, or locally determined by \textit{a priori} geological knowledge.
-\item $\mitbf{\mu}_j$ contains the means of the physical properties of rock unit $j$.
-\item $\mitbf{\Sigma}_j$ is the covariance matrix of the physical properties of rock unit $j$.
+\item $\mathbf{\mu}_j$ contains the means of the physical properties of rock unit $j$.
+\item $\mathbf{\Sigma}_j$ is the covariance matrix of the physical properties of rock unit $j$.
 \item $\mathbf{W}_i^{-1}$ is a weighting term at location $i$, used for example to include depth or sensitivity weighting. We define it from weights $\left\{{w}_{i, p}, ~i=1..n, ~p=1..q\right\}$; this is a scalar value for each cell $i$ and physical property $p$. $\mathbf{W}_i$ is defined as a diagonal matrix made of the combination of all the weights at the specific location $i$: $\mathbf{W}_i = \text{diag}(\mathbf{w}_{i})$, with the same notation convention as for the model $\mathbf{m}$. This allows the weighting to be different for each physical property. We can thus weight each physical property according to the survey on which it depends.
-\item $\Theta$ holds the GMM global variables $\Theta= \left\{\pi_j, \mitbf{\mu}_j, \mitbf{\Sigma}_j\right\}_{j=1..c}$.
+\item $\Theta$ holds the GMM global variables $\Theta= \left\{\pi_j, \mathbf{\mu}_j, \mathbf{\Sigma}_j\right\}_{j=1..c}$.
 \end{itemize}
 
 This GMM probability distribution (equation \eqref{eq:mixturemodel}), representing the current geological and petrophysical knowledge, is used to define the smallness term in the regularization. In the next subsection, we use this multivariate GMM prior to develop a modified objective function for the inverse problem.
@@ -201,10 +201,10 @@ Generalizing the result obtained in \citet{ggz389} to multiple physical properti
 &\Phi_s(\mathbf{m}) = \frac{1}{2}\sum_{i=1}^n||\mathbf{W}_{s}(\Theta, z_i)(\mathbf{m}_i-\mathbf{m}_{\text{ref}}(\Theta, z_i))||_2^2 \label{eq:smallness_petro},\\
 &\text{with:}\nonumber\\
 &z_i = \mathop{\hbox{argmax}}\limits_{\tilde{z}_i}\mathcal{P}(\mathbf{m}|\tilde{z}_i)\mathcal{P}(\tilde{z}_i) \label{eq:membership}, \\
-&\mathbf{m}_{\text{ref}}(\Theta, z_i) = \mitbf{\mu}_{z_i} \label{eq:mref_update},\\
-&\mathbf{W}_{s}(\Theta, z_i) = \mitbf{\Sigma}_{z_i}^{-1/2} \mathbf{W}_i\label{eq:Ws_update},
+&\mathbf{m}_{\text{ref}}(\Theta, z_i) = \mathbf{\mu}_{z_i} \label{eq:mref_update},\\
+&\mathbf{W}_{s}(\Theta, z_i) = \mathbf{\Sigma}_{z_i}^{-1/2} \mathbf{W}_i\label{eq:Ws_update},
 \end{align}
-where $\mitbf{\Sigma}^{-1/2}$ is the upper triangular matrix from the Cholesky decomposition of the precision matrix $\mitbf{\Sigma}^{-1}$.
+where $\mathbf{\Sigma}^{-1/2}$ is the upper triangular matrix from the Cholesky decomposition of the precision matrix $\mathbf{\Sigma}^{-1}$.
 
 Note that our implementation can handle either the log-likelihood of the GMM or its least-squares approximation. When the petrophysical signature of the rock units are not known, it is possible to learn the parameters of the GMM \citep{ggz389} (Fig. \ref{fig:Framework_with_numbers.pdf}, Process $2$). The extension of that learning process to multiple physical properties can be found in Appendix \ref{UpdateTheta}.
 
@@ -214,7 +214,7 @@ The PGI smallness expresses a misfit between the petrophysical and geological in
 \begin{align}
 &\Phi_{\text{petro}}(\mathbf{m}) = \frac{1}{2}\sum_{i=1}^n||\mathbf{\tilde{W}}_{s}(\Theta, z_i)(\mathbf{m}_i-\mathbf{m}_{\text{ref}}(\Theta, z_i))||_2^2 \label{eq:petroness_petro},\\
 &\text{with: } \nonumber \\
-&\mathbf{\tilde{W}}_{s}(\Theta, z_i) = \mitbf{\Sigma}_{z_i}^{-1/2},
+&\mathbf{\tilde{W}}_{s}(\Theta, z_i) = \mathbf{\Sigma}_{z_i}^{-1/2},
 \end{align}
 where $z_i$ and $\mathbf{m}_{\text{ref}}$ are the same as in equations \eqref{eq:membership} and \eqref{eq:mref_update}.
 
@@ -289,7 +289,7 @@ We now define our strategy for weighting the multiple geophysical data misfits t
 
 %\begin{align}
 %&\lambda_k = \mathop{\hbox{max}}\{\text{eigenvalues of: }{\mathbf{J}^k}^\top {\mathbf{W}^k_d}^\top \mathbf{W}^k_d\mathbf{J}^k \} \label{eigenvalue}\\
-%&\tilde{\chi}_k = \frac{1}{\lambda_k\cdot\mathop{\hbox{max}} \left({\mitbf{\mu}^{\{k\}}}^2 \right)}. \label{chi_weighting}\\
+%&\tilde{\chi}_k = \frac{1}{\lambda_k\cdot\mathop{\hbox{max}} \left({\mathbf{\mu}^{\{k\}}}^2 \right)}. \label{chi_weighting}\\
 %&\text{then we normalize the sum:} \nonumber \\
 %&\chi_k = \frac{\tilde{\chi}_k}{\sum_{\tilde{k}}^{r} \tilde{\chi}_{\tilde{k}}} \label{eq:chi_normalizing}
 %\end{align}
@@ -410,13 +410,13 @@ This result was obtained by providing the petrophysical means of the rock units 
 
 We have illustrated the gains made by the multi-physics PGI framework when extensive and quantitative \textit{a priori} information is provided. We now investigate how to perform multi-physics inversions when \textit{a priori} information to design the coupling term is not available. \citet{ggz389} emphasized the benefits of learning a GMM during the inversion process to compensate for uncertain, or unknown, petrophysical information. At each iteration, the GMM parameters are determined by running a Maximum A Posteriori Expectation-Maximization (MAP-EM) clustering algorithm \citep{ExpectationMaximization}. The MAP-EM algorithm estimates compromise values for the GMM parameters based on the prior GMM parameters, weighted by confidence parameters in this prior knowledge, and the current geophysical model. We generalize the learning process of the GMM parameters to a multidimensional case in Appendix \ref{UpdateTheta}.
 
-In the next example, we demonstrate how learning the means of the kimberlite units iteratively through the inversion allows us to still perform multi-physics inversions without providing physical property mean values. This is done by acting on the $\{\mitbf{\kappa}\}$ confidence parameters in the means. A confidence $\kappa$ value of zero indicates that the mean is fully learned from the inversion, while an infinite confidence fixes the mean to its prior value. In all the inversions with limited information, we fix the means of the background for both physical properties to their true values (zero); this is a usual assumption in Tikhonov inversions of potential fields that the background has a zero contrast. We keep the covariances of the GMM fixed and similar to what we used previously. The covariance matrices define our petrophysical noise levels and how spread each petrophysical signature can be.
+In the next example, we demonstrate how learning the means of the kimberlite units iteratively through the inversion allows us to still perform multi-physics inversions without providing physical property mean values. This is done by acting on the $\{\mathbf{\kappa}\}$ confidence parameters in the means. A confidence $\kappa$ value of zero indicates that the mean is fully learned from the inversion, while an infinite confidence fixes the mean to its prior value. In all the inversions with limited information, we fix the means of the background for both physical properties to their true values (zero); this is a usual assumption in Tikhonov inversions of potential fields that the background has a zero contrast. We keep the covariances of the GMM fixed and similar to what we used previously. The covariance matrices define our petrophysical noise levels and how spread each petrophysical signature can be.
 
 \subsubsection{Employing qualitative information with PGI} \label{sec:InterpreterAssumption}
 
-Once the Tikhonov inversions have been run (see Fig. \ref{fig:TKC_L2_Synthetic.png}), it already appears likely that the gravity and magnetic anomalies are mostly generated by two distinct bodies, as the centres of the two recovered anomalous bodies (density and magnetic susceptibility) are at different locations. Lacking quantitative petrophysical information, the multi-physics PGI framework allows us to formulate the following "interpreter's assumption": one kimberlite unit is responsible for the gravity anomaly, while a second one is responsible for the magnetic response. Employing this assumption is made possible in our framework by defining the confidences in the means of each unit $\{\mitbf{\kappa}\}$ as vectors. This allows us to act on each physical property mean value of each unit. For example, for the kimberlite unit that is assumed to be responsible for the magnetic response, we set the confidence $\kappa$ in its magnetic susceptibility to zero; the MAP-EM algorithm decides its value at each iteration based solely on the current geophysical model. On the contrary, its mean density contrast is kept fixed at zero by setting the confidence $\kappa$ in this mean value to infinity. The same procedure is applied for the kimberlite unit that is assumed to be responsible for the gravity response. The initialization of the density contrast and magnetic susceptibility mean values, for the kimberlite units responsible of the gravity and magnetic response respectively, has little impact on the inversion result, so long as the initial guess is reasonable. It is also common practice, in general, to run clustering algorithms multiple times from various initializations before choosing a specific outcome \citep{ExpectationMaximization, Murphy2012}. In the specific result shown in Fig. \ref{fig:TKC_NoPrior3ClustersAssumption_Synthetic.png}, the density contrast and magnetic susceptibility mean values for the respective kimberlite rock units were initialized at $-1 \text{ g/cm}^3$ and $0.1$ SI. Similar results were obtained with other initializations ($-0.4 \text{ g/cm}^3$ and $0.01$ SI etc., but not with $0 \text{ g/cm}^3$ and $0$ SI for all units). Because of the weak dependency of the result with regard to the initialization, we choose not to show the initial value in Fig. \ref{fig:TKC_LearningGMMmeans.png}, which presents the evolution of the means throughout the multi-physics PGI with qualitative information.
+Once the Tikhonov inversions have been run (see Fig. \ref{fig:TKC_L2_Synthetic.png}), it already appears likely that the gravity and magnetic anomalies are mostly generated by two distinct bodies, as the centres of the two recovered anomalous bodies (density and magnetic susceptibility) are at different locations. Lacking quantitative petrophysical information, the multi-physics PGI framework allows us to formulate the following "interpreter's assumption": one kimberlite unit is responsible for the gravity anomaly, while a second one is responsible for the magnetic response. Employing this assumption is made possible in our framework by defining the confidences in the means of each unit $\{\mathbf{\kappa}\}$ as vectors. This allows us to act on each physical property mean value of each unit. For example, for the kimberlite unit that is assumed to be responsible for the magnetic response, we set the confidence $\kappa$ in its magnetic susceptibility to zero; the MAP-EM algorithm decides its value at each iteration based solely on the current geophysical model. On the contrary, its mean density contrast is kept fixed at zero by setting the confidence $\kappa$ in this mean value to infinity. The same procedure is applied for the kimberlite unit that is assumed to be responsible for the gravity response. The initialization of the density contrast and magnetic susceptibility mean values, for the kimberlite units responsible of the gravity and magnetic response respectively, has little impact on the inversion result, so long as the initial guess is reasonable. It is also common practice, in general, to run clustering algorithms multiple times from various initializations before choosing a specific outcome \citep{ExpectationMaximization, Murphy2012}. In the specific result shown in Fig. \ref{fig:TKC_NoPrior3ClustersAssumption_Synthetic.png}, the density contrast and magnetic susceptibility mean values for the respective kimberlite rock units were initialized at $-1 \text{ g/cm}^3$ and $0.1$ SI. Similar results were obtained with other initializations ($-0.4 \text{ g/cm}^3$ and $0.01$ SI etc., but not with $0 \text{ g/cm}^3$ and $0$ SI for all units). Because of the weak dependency of the result with regard to the initialization, we choose not to show the initial value in Fig. \ref{fig:TKC_LearningGMMmeans.png}, which presents the evolution of the means throughout the multi-physics PGI with qualitative information.
 
-%Considering the confidences $\{\mitbf{\kappa}\}$ as vectors is an important contribution of our framework, and it advances the approach of \citet{Sun2016} for updating the means. In their approach, the updates to the means are controlled per unit only, without differentiating the physical properties that are well-known from the undocumented ones. They can either learn the means of a unit or keep it fixed, whereas the framework I present is capable of learning specific components of the GMM means for each unit, as demonstrated in this example.
+%Considering the confidences $\{\mathbf{\kappa}\}$ as vectors is an important contribution of our framework, and it advances the approach of \citet{Sun2016} for updating the means. In their approach, the updates to the means are controlled per unit only, without differentiating the physical properties that are well-known from the undocumented ones. They can either learn the means of a unit or keep it fixed, whereas the framework I present is capable of learning specific components of the GMM means for each unit, as demonstrated in this example.
 
 
 \begin{figure*}
@@ -439,7 +439,7 @@ The means of the GMM are learned iteratively following the constraints defined b
 \label{fig:TKC_LearningGMMmeans.png}
 \end{figure}
 
-Finally, we note that distinguishing two bodies, each mostly responsible for a particular geophysical response, is not automatically required from the geophysical datasets themselves. Indeed, we present in Appendix \ref{sec:additionalIndividual}, Fig. \ref{fig:TKC_NoPrior_Synthetic.png} a multi-physics PGI with no petrophysical information and only two clusters, where the confidences $\{\mitbf{\kappa}\}$ are all zeros for the kimberlite unit; the background mean is kept fixed at zero contrast for both physical properties. A single anomalous body is able to fit both gravity and magnetic datasets, with a learned mean and an acceptable spread according to the set covariance matrices. This further highlights the gains made possible by the opportunities to simply incorporate a qualitative, geologic assumption within the inversion framework.
+Finally, we note that distinguishing two bodies, each mostly responsible for a particular geophysical response, is not automatically required from the geophysical datasets themselves. Indeed, we present in Appendix \ref{sec:additionalIndividual}, Fig. \ref{fig:TKC_NoPrior_Synthetic.png} a multi-physics PGI with no petrophysical information and only two clusters, where the confidences $\{\mathbf{\kappa}\}$ are all zeros for the kimberlite unit; the background mean is kept fixed at zero contrast for both physical properties. A single anomalous body is able to fit both gravity and magnetic datasets, with a learned mean and an acceptable spread according to the set covariance matrices. This further highlights the gains made possible by the opportunities to simply incorporate a qualitative, geologic assumption within the inversion framework.
 
 \subsection{DO-$27$ example summary}
 
@@ -449,7 +449,7 @@ From the petrophysical perspective, the density-magnetic susceptibility cross-pl
 
 We have expanded the PGI framework developed in \citet{ggz389} to carry out multi-physics joint inversions, and we have proposed a strategy to balance any number of geophysical data misfits along with a coupling term. In our experiments, this strategy appeared to be critical to fitting data from multiple surveys as well as petrophysical data. Finally, we have used a synthetic example to demonstrate the capabilities of the multi-physics PGI framework.
 
-With regards to the iterative learning of GMM means when limited information is available, considering the confidences $\{\mitbf{\kappa}\}$ as vectors is an important contribution of our framework and it advances the approach of \citet{Sun2016}. In their approach, the updates to the means are controlled per unit only, without differentiating the physical properties that are well-known from the undocumented ones. They can either learn the means of a unit or keep it fixed, whereas the framework we present is capable of learning specific components of the GMM means for each unit, as demonstrated in the DO-$27$ example.
+With regards to the iterative learning of GMM means when limited information is available, considering the confidences $\{\mathbf{\kappa}\}$ as vectors is an important contribution of our framework and it advances the approach of \citet{Sun2016}. In their approach, the updates to the means are controlled per unit only, without differentiating the physical properties that are well-known from the undocumented ones. They can either learn the means of a unit or keep it fixed, whereas the framework we present is capable of learning specific components of the GMM means for each unit, as demonstrated in the DO-$27$ example.
 
 We demonstrated examples of multi-physics inversions with potential fields, which are linear problems. In previous works \citep{ggz389}, the PGI approach was applied to nonlinear electromagnetic problems (magnetotelluric, direct-current resistivity, and a field frequency-domain electromagnetic dataset), but it considered only individual surveys depending on a single physical property. We plan to implement this approach for performing multi-physics inversions with electromagnetic methods. This will also be an opportunity to test the robustness of our reweighting strategies for multi-physics inversions with nonlinear geophysical problems. Areas such as the DO-$27$ kimberlite pipe \citep{TKCpaper, TKCEM, TKCIP}, with many different types of geophysical surveys available, are prime candidates for the application of the PGI approach to refine the image of the subsurface structures by integrating more datasets and physical properties in a single inversion.
 
@@ -486,7 +486,7 @@ We sincerely thank the open-source software \texttt{SimPEG} community whose work
     \label{fig:example_projection.png}
 \end{figure}
 
-While linear trends can be accounted through the covariance matrix to obtain elongated clusters, it is also possible to account for nonlinear relationships between physical properties in our framework (Fig. \ref{fig:example_projection.png}). This is achieved by composing the Gaussian function with the nonlinear relationship $P_j$ between the physical properties of the particular rock unit $j$. This corresponds to using $\mathcal{N}(P_j(\mathbf{m}_i)|\mitbf{\mu}_j, \mathbf{W}_i^{-1}\mitbf{\Sigma}_j\mathbf{W}_i^{-1})$ for each rock unit $j$ in the GMM in equation \eqref{eq:mixturemodel}.
+While linear trends can be accounted through the covariance matrix to obtain elongated clusters, it is also possible to account for nonlinear relationships between physical properties in our framework (Fig. \ref{fig:example_projection.png}). This is achieved by composing the Gaussian function with the nonlinear relationship $P_j$ between the physical properties of the particular rock unit $j$. This corresponds to using $\mathcal{N}(P_j(\mathbf{m}_i)|\mathbf{\mu}_j, \mathbf{W}_i^{-1}\mathbf{\Sigma}_j\mathbf{W}_i^{-1})$ for each rock unit $j$ in the GMM in equation \eqref{eq:mixturemodel}.
 
 In this section, we present a joint inversion of two linear problems whose respective physical properties have nonlinear petrophysical relationships between each other. For simplicity, the physics of the two problems is the same and is based on the example previously used in \citet{Li1996}. The models are discretized on a 1D mesh defined on the interval $[0, 1]$ and divided into 100 cells. Both datasets consist of $30$ data points at various frequencies equally distributed from $1$ to $59$ evaluated according to:
 \begin{equation}
@@ -521,13 +521,13 @@ We choose to follow a semi-conjugate prior approach for the choice of the prior 
 The computation of the responsibilities for the E-step of the MAP-EM algorithm stay the same as in \citet{ggz389}, except for the dimension of the parameters:
 
 \begin{equation}
-n_{ij}^{(k)} = \frac{\mathcal{P}(z_i=j)^{(k-1)}\mathcal{N}(\mathbf{m}_i|{\mitbf{\mu}_j}^{(k-1)}, {\mitbf{\Sigma}_j}^{(k-1)})}{ \sum_{t=1}^c \mathcal{P}(z_i=t)^{(k-1)} \mathcal{N}({\mathbf{m}}_i|{\mitbf{\mu}_t}^{(k-1)}, {\mitbf{\Sigma}_j}^{(k-1)})} \label{eq:responsibilities}.
+n_{ij}^{(k)} = \frac{\mathcal{P}(z_i=j)^{(k-1)}\mathcal{N}(\mathbf{m}_i|{\mathbf{\mu}_j}^{(k-1)}, {\mathbf{\Sigma}_j}^{(k-1)})}{ \sum_{t=1}^c \mathcal{P}(z_i=t)^{(k-1)} \mathcal{N}({\mathbf{m}}_i|{\mathbf{\mu}_t}^{(k-1)}, {\mathbf{\Sigma}_j}^{(k-1)})} \label{eq:responsibilities}.
 \end{equation}
 %The conjugate prior for the proportions follow a Dirichlet distribution:
 
 The update to the proportions stays similar to the univariate case \citep{ggz389}:
 \begin{align}
-%&\mathcal{P}(\mitbf{\pi}) = \text{Dir}({\zeta}{\pi}_{\text{prior}}V-1) \label{pi_prior}\\
+%&\mathcal{P}(\mathbf{\pi}) = \text{Dir}({\zeta}{\pi}_{\text{prior}}V-1) \label{pi_prior}\\
 %&\text{Thus giving the update:} \nonumber \\
 &{\pi}^{(k)}_j = \frac{V_{j}^{(k)}+\zeta_j {{\pi}_j}_{\text{prior}}V}{V(1+\sum_{t=1}^c \zeta_t {{\pi}_t}_{\text{prior}})} \label{eq:pi_update}, \\
 &\text{with:} \nonumber\\
@@ -539,9 +539,9 @@ active mesh. This allows the estimates to be mesh-independent by using volumetri
 
 %The semi-conjugate for the means and covariance matrices follow respectively a Gaussian and Inverse-Wishart distributions:
 %\begin{align}
-%&\mathcal{P}(\mitbf{\mu}| \mitbf{\Sigma}) = \mathcal{N}(\mitbf{\mu}|\mitbf{\mu}_{\text{prior}}, \text{diag}(\mitbf{\kappa}\pi_{\text{prior}}V)^{-1} \Sigma) \label{mu_semiprior} \\
+%&\mathcal{P}(\mathbf{\mu}| \mathbf{\Sigma}) = \mathcal{N}(\mathbf{\mu}|\mathbf{\mu}_{\text{prior}}, \text{diag}(\mathbf{\kappa}\pi_{\text{prior}}V)^{-1} \Sigma) \label{mu_semiprior} \\
 %&\text{and:}\nonumber \\
-%&\mathcal{P}(\mitbf{\Sigma}|\mitbf{\mu}) = \mathcal{W}^{-1}(\mitbf{\Sigma}|({\nu}{\pi}_{\text{prior}}V)\mitbf{\Sigma}_{\text{prior}}, {\nu}{\pi}_{\text{prior}}V-q-1) \label{sigma_semiprior}
+%&\mathcal{P}(\mathbf{\Sigma}|\mathbf{\mu}) = \mathcal{W}^{-1}(\mathbf{\Sigma}|({\nu}{\pi}_{\text{prior}}V)\mathbf{\Sigma}_{\text{prior}}, {\nu}{\pi}_{\text{prior}}V-q-1) \label{sigma_semiprior}
 %\end{align}
 
 The mean update proposed in \citet{ggz389} generalizes to each physical property $p$:
@@ -550,14 +550,14 @@ The mean update proposed in \citet{ggz389} generalizes to each physical property
 &\text{with:} \nonumber\\
 &{\bar{\mathbf{m}}}_j^{(k)} = \frac{\sum^n_{i=1} v_i n_{ij}^{(k)} \mathbf{m}_i}{V_{j}^{(k)}},
 \end{align}
-where $\kappa_j^p$ is the confidence in ${{\mu^p_j}_{\text{prior}}}$, which is the prior mean of the physical property $p$ of the rock unit $j$. The confidences $\{\mitbf{\kappa}\}$ are thus consider as vectors. This is an important tool that we use in section \ref{sec:InterpreterAssumption} to formulate a geologic assumption about the model.
+where $\kappa_j^p$ is the confidence in ${{\mu^p_j}_{\text{prior}}}$, which is the prior mean of the physical property $p$ of the rock unit $j$. The confidences $\{\mathbf{\kappa}\}$ are thus consider as vectors. This is an important tool that we use in section \ref{sec:InterpreterAssumption} to formulate a geologic assumption about the model.
 
-The update to the covariance matrices is, with $\nu_j$ the confidence in the prior covariance matrix ${\mitbf{\Sigma}_j}_{\text{prior}}$ of the rock unit $j$:
+The update to the covariance matrices is, with $\nu_j$ the confidence in the prior covariance matrix ${\mathbf{\Sigma}_j}_{\text{prior}}$ of the rock unit $j$:
 \begin{align}
-&{\mitbf{\Sigma}_j}^{(k)} = \frac{{{V_{j}^{(k)}} {\mitbf{\Sigma}_{\bar{\mathbf{m}}}}_j}^{(k)} + \nu_j {\pi_j}_{prior} V {\mitbf{\Sigma}_j}_{prior}}
+&{\mathbf{\Sigma}_j}^{(k)} = \frac{{{V_{j}^{(k)}} {\mathbf{\Sigma}_{\bar{\mathbf{m}}}}_j}^{(k)} + \nu_j {\pi_j}_{prior} V {\mathbf{\Sigma}_j}_{prior}}
 {{V_{j}^{(k)}} + \nu_j {\pi_j}_{prior} V} \label{eq:sig_update},\\
 &\text{with:} \nonumber\\
-&{\mitbf{\Sigma}_{\bar{\mathbf{m}}}}_j^{(k)} =\frac{1}{{V_{j}^{(k)}}} \sum_{i=1}^{n} v_i n_{ij}^{(k)}(\mathbf{m}_i-\bar{\mathbf{m}_j}^{(k)})(\mathbf{m}_i-\bar{\mathbf{m}_j}^{(k)})^\top,
+&{\mathbf{\Sigma}_{\bar{\mathbf{m}}}}_j^{(k)} =\frac{1}{{V_{j}^{(k)}}} \sum_{i=1}^{n} v_i n_{ij}^{(k)}(\mathbf{m}_i-\bar{\mathbf{m}_j}^{(k)})(\mathbf{m}_i-\bar{\mathbf{m}_j}^{(k)})^\top,
 \end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -579,7 +579,7 @@ The update to the covariance matrices is, with $\nu_j$ the confidence in the pri
     \begin{itemize}
       \item \textit{Objective function}: data's noise $\left\{{\mathbf{W}_d}_p\right\}_{p=1..q}$, $\beta^{(0)}$ and $\left\{\alpha\right\}$.parameters.
       \item \textit{Localized prior}: specific $\mathcal{P}(z_i)$ for available locations $i \in \{1..n\}$, weights $\left\{\mathbf{w}\right\}$.
-      \item \textit{GMM prior weights}: $\left\{\mitbf{\kappa}_j, \nu_j, \zeta_j\right\}_{j=1..c}$ for the means, variances and proportions.
+      \item \textit{GMM prior weights}: $\left\{\mathbf{\kappa}_j, \nu_j, \zeta_j\right\}_{j=1..c}$ for the means, variances and proportions.
       \item \textit{Optimization}: $\beta$-cooling factor $\gamma$ ($> 1$), sufficient decrease rate $\tau$ ($\leq 1$), tolerance on target misfit $\epsilon$.
     \end{itemize}
 
