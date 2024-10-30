@@ -50,16 +50,17 @@ n_{ij}^{(k)} = \frac{\mathcal{P}(z_i=j)^{(k-1)}\mathcal{N}(\mathbf{m}_i|{\mathbf
 
 The update to the proportions stays similar to the univariate case \citep{ggz389}:
 \begin{equation}
-%&\mathcal{P}(\mathbf{\pi}) = \text{Dir}({\zeta}{\pi}_{\text{prior}}V-1) \label{pi_prior}\\
-%&\text{Thus giving the update:} \nonumber \\
-{\pi}^{(k)}_j = \frac{V_{j}^{(k)}+\zeta_j {{\pi}_j}_{\text{prior}}V}{V(1+\sum_{t=1}^c \zeta_t {{\pi}_t}_{\text{prior}})} \label{eq:pi_update}, \\
+{\pi}^{(k)}_j = \frac{V_{j}^{(k)}+\zeta_j {{\pi}_j}_{\text{prior}}V}{V(1+\sum_{t=1}^c \zeta_t {{\pi}_t}_{\text{prior}})} ,
+\label{eq:pi_update}
 \end{equation}
 with:
 \begin{equation}
-V_{j}^{(k)} = \sum^n_{i=1} v_i n_{ij}^{(k)}, \label{VolumeProportions}\\
+V_{j}^{(k)} = \sum^n_{i=1} v_i n_{ij}^{(k)},
+\label{VolumeProportions}
 \end{equation}
+and
 \begin{equation}
-\text{ and } V=\sum^n_{i=1} v_i,
+V=\sum^n_{i=1} v_i,
 \end{equation}
 where $\zeta_j$ is the confidence in the prior proportion ${\pi_j}_{\text{prior}}$ of the rock unit $j$, $v_i$ is the volume of the $i$\textsuperscript{th} cell and $V$ is the volume of the
 active mesh. This allows the estimates to be mesh-independent by using volumetric proportions instead of cell counts.
@@ -321,7 +322,7 @@ Finally, we assemble the inversion using \texttt{directives} in SimPEG to orches
 
 \begin{figure}
 \centering
-\includegraphics[width=0.5\textwidth]{TKC_AdditionalIndividualPetro_FULL_Synthetic.png}
+\includegraphics[width=0.5\textwidth]{Fig/LowRes/TKC_AdditionalIndividualPetro_FULL_Synthetic.png}
 \caption{(a) magnetic PGI using PK/VK magnetic signature. Note that the recovered volume is much larger than the volume of PK/VK recovered from the gravity inversion with this unit density contrast (Fig. \ref{fig:TKC_IndividualPetro_Synthetic.png}c); (b) gravity PGI using the HK density contrast signature. Note again the larger volume compared to Fig. \ref{fig:TKC_IndividualPetro_Synthetic.png}(d).}
 \label{fig:TKC_AdditionalIndividualPetro_FULL_Synthetic.png}
 \end{figure}
