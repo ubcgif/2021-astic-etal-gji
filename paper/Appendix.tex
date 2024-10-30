@@ -49,14 +49,18 @@ n_{ij}^{(k)} = \frac{\mathcal{P}(z_i=j)^{(k-1)}\mathcal{N}(\mathbf{m}_i|{\mathbf
 %The conjugate prior for the proportions follow a Dirichlet distribution:
 
 The update to the proportions stays similar to the univariate case \citep{ggz389}:
-\begin{align}
+\begin{equation}
 %&\mathcal{P}(\mathbf{\pi}) = \text{Dir}({\zeta}{\pi}_{\text{prior}}V-1) \label{pi_prior}\\
 %&\text{Thus giving the update:} \nonumber \\
-&{\pi}^{(k)}_j = \frac{V_{j}^{(k)}+\zeta_j {{\pi}_j}_{\text{prior}}V}{V(1+\sum_{t=1}^c \zeta_t {{\pi}_t}_{\text{prior}})} \label{eq:pi_update}, \\
-&\text{with:} \nonumber\\
-&V_{j}^{(k)} = \sum^n_{i=1} v_i n_{ij}^{(k)}, \label{VolumeProportions}\\
-&\text{ and } V=\sum^n_{i=1} v_i,
-\end{align}
+{\pi}^{(k)}_j = \frac{V_{j}^{(k)}+\zeta_j {{\pi}_j}_{\text{prior}}V}{V(1+\sum_{t=1}^c \zeta_t {{\pi}_t}_{\text{prior}})} \label{eq:pi_update}, \\
+\end{equation}
+with:
+\begin{equation}
+V_{j}^{(k)} = \sum^n_{i=1} v_i n_{ij}^{(k)}, \label{VolumeProportions}\\
+\end{equation}
+\begin{equation}
+\text{ and } V=\sum^n_{i=1} v_i,
+\end{equation}
 where $\zeta_j$ is the confidence in the prior proportion ${\pi_j}_{\text{prior}}$ of the rock unit $j$, $v_i$ is the volume of the $i$\textsuperscript{th} cell and $V$ is the volume of the
 active mesh. This allows the estimates to be mesh-independent by using volumetric proportions instead of cell counts.
 
@@ -68,25 +72,29 @@ active mesh. This allows the estimates to be mesh-independent by using volumetri
 %\end{align}
 
 The mean update proposed in \citet{ggz389} generalizes to each physical property $p$:
-\begin{align}
-&{\mu_j^p}^{(k)}=\frac{V_{j}^{(k)}{\bar{{m}^p_j}}^{(k)} + \kappa^p_j {\pi_j}_{\text{prior}} V {\mu^p_j}_{\text{prior}}}{V_{j}^{(k)}+\kappa_j^p {\pi_j}_{\text{prior}} V} \label{eq:mu_update},\\
-&\text{with:} \nonumber\\
-&{\bar{\mathbf{m}}}_j^{(k)} = \frac{\sum^n_{i=1} v_i n_{ij}^{(k)} \mathbf{m}_i}{V_{j}^{(k)}},
-\end{align}
+\begin{equation}
+{\mu_j^p}^{(k)}=\frac{V_{j}^{(k)}{\bar{{m}^p_j}}^{(k)} + \kappa^p_j {\pi_j}_{\text{prior}} V {\mu^p_j}_{\text{prior}}}{V_{j}^{(k)}+\kappa_j^p {\pi_j}_{\text{prior}} V} \label{eq:mu_update},
+\end{equation}
+with:
+\begin{equation}
+{\bar{\mathbf{m}}}_j^{(k)} = \frac{\sum^n_{i=1} v_i n_{ij}^{(k)} \mathbf{m}_i}{V_{j}^{(k)}},
+\end{equation}
 where $\kappa_j^p$ is the confidence in ${{\mu^p_j}_{\text{prior}}}$, which is the prior mean of the physical property $p$ of the rock unit $j$. The confidences $\{\mathbf{\kappa}\}$ are thus consider as vectors. This is an important tool that we use in section \ref{sec:InterpreterAssumption} to formulate a geologic assumption about the model.
 
 The update to the covariance matrices is, with $\nu_j$ the confidence in the prior covariance matrix ${\mathbf{\Sigma}_j}_{\text{prior}}$ of the rock unit $j$:
-\begin{align}
-&{\mathbf{\Sigma}_j}^{(k)} = \frac{{{V_{j}^{(k)}} {\mathbf{\Sigma}_{\bar{\mathbf{m}}}}_j}^{(k)} + \nu_j {\pi_j}_{prior} V {\mathbf{\Sigma}_j}_{prior}}
-{{V_{j}^{(k)}} + \nu_j {\pi_j}_{prior} V} \label{eq:sig_update},\\
-&\text{with:} \nonumber\\
-&{\mathbf{\Sigma}_{\bar{\mathbf{m}}}}_j^{(k)} =\frac{1}{{V_{j}^{(k)}}} \sum_{i=1}^{n} v_i n_{ij}^{(k)}(\mathbf{m}_i-\bar{\mathbf{m}_j}^{(k)})(\mathbf{m}_i-\bar{\mathbf{m}_j}^{(k)})^\top,
-\end{align}
+\begin{equation}
+{\mathbf{\Sigma}_j}^{(k)} = \frac{{{V_{j}^{(k)}} {\mathbf{\Sigma}_{\bar{\mathbf{m}}}}_j}^{(k)} + \nu_j {\pi_j}_{prior} V {\mathbf{\Sigma}_j}_{prior}}
+{{V_{j}^{(k)}} + \nu_j {\pi_j}_{prior} V} \label{eq:sig_update},
+\end{equation}
+with:
+\begin{equation}
+{\mathbf{\Sigma}_{\bar{\mathbf{m}}}}_j^{(k)} =\frac{1}{{V_{j}^{(k)}}} \sum_{i=1}^{n} v_i n_{ij}^{(k)}(\mathbf{m}_i-\bar{\mathbf{m}_j}^{(k)})(\mathbf{m}_i-\bar{\mathbf{m}_j}^{(k)})^\top,
+\end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Algorithm} \label{algorithm}
 
-\begin{algorithm*}
+\begin{algorithm}
     \small
     \SetKwInOut{Initialization}{Initialization}
     \caption{PGI extended from \citet{ggz389} for joint inversion}
@@ -151,7 +159,7 @@ The update to the covariance matrices is, with $\nu_j$ the confidence in the pri
         }
 
     }
-\end{algorithm*}
+\end{algorithm}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -211,7 +219,7 @@ Next, we construct the forward simulations for both the gravity and magnetic dat
 %\end{verbatim}
 %}
 
-With both gravity and magnetic simulations defined, we now have the ability to compute predicted data given a model. The next step is to construct the data misfit term as described in equation \eqref{eq:datamisfit}. 
+With both gravity and magnetic simulations defined, we now have the ability to compute predicted data given a model. The next step is to construct the data misfit term as described in equation \eqref{eq:datamisfit}.
 \usestyle{default}
 \includecode{combodatamisfit.py}
 %{\small\begin{verbatim}
