@@ -1,0 +1,4 @@
+format: jb-book
+root: jointarticle.tex
+chapters:
+  - file: Appendix.tex
